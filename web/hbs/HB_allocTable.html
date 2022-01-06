@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr class="table-success">
+      <th scope="col" class="borderRight">Asset Allocation</th>
+      <th scope="col">Supply</th>
+      <th scope="col">Borrow</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each ./data}}
+    <tr>
+      <th scope="row" class="borderRight">{{symbol}}</th>
+      <td>${{this.supplied.value}}({{this.supplied.amount}} {{symbol}})</td>
+      <td>${{this.borrowed.value}}({{this.borrowed.amount}} {{symbol}})</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

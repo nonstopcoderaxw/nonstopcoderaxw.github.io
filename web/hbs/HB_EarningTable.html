@@ -1,0 +1,35 @@
+
+<table class="table">
+  <thead>
+    <tr class="table-info">
+      <th scope="col" class="borderRight">{{title}}</th>
+      <th scope="col">Weekly</th>
+      <th scope="col">Monthly</th>
+      <th scope="col">Quarterly</th>
+      <th scope="col">Yearly</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" class="borderRight">Interest Earning</th>
+      <td><span>${{data.interest.weekly}}</span></td>
+      <td><span>${{data.interest.monthly}}</span></td>
+      <td><span>${{data.interest.quarterly}}</span></td>
+      <td><span>${{data.interest.yearly}}</span></td>
+    </tr>
+    <tr>
+      <th scope="row" class="borderRight">Comp Earning</th>
+      <td><span>${{data.comp.weekly.value}}(COMP {{data.comp.weekly.amount}})</span></td>
+      <td><span>${{data.comp.monthly.value}}(COMP {{data.comp.monthly.amount}})</span></td>
+      <td><span>${{data.comp.quarterly.value}}(COMP {{data.comp.quarterly.amount}})</span></td>
+      <td><span>${{data.comp.yearly.value}}(COMP {{data.comp.yearly.amount}})</span></td>
+    </tr>
+    <tr>
+      <th scope="row" class="borderRight">Total</th>
+      <td><span>${{data.total.weekly}}</span></td>
+      <td><span>${{data.total.monthly}}</span></td>
+      <td><span>${{data.total.quarterly}}</span></td>
+      <td><span>${{data.total.yearly}}</span></td>
+    </tr>
+  </tbody>
+</table>
