@@ -37,7 +37,7 @@ async function UIGV_TableLiquidatorsDRAW(){
       var rows = [];
       for(var i = 0; i < _data.length; i++){
           const row = [
-              `<a target="_blank" href="/txByLiquidator.html?lqAddr=${_data[i].address}">${_data[i].address}</a>`,
+              `<a target="_blank" href="./txByLiquidator.html?lqAddr=${_data[i].address}">${_data[i].address}</a>`,
               parseInt(_data[i].totalProfitInUSD),
               parseInt(_data[i].numberOfLiquidations)
           ];
@@ -156,7 +156,7 @@ async function UIGV_TableLiquidationBlocksDRAW() {
         var rows = [];
         for(var i = 0; i < _data.length; i++){
             const row = [
-                `<a target="_blank" href="/txByBlock.html?blockNumber=${_data[i].blockNumber}">${_data[i].blockNumber}</a>`,
+                `<a target="_blank" href="./txByBlock.html?blockNumber=${_data[i].blockNumber}">${_data[i].blockNumber}</a>`,
                 UICommon.timeDifference(_data[i].timestamp),
                 parseInt(_data[i].numberOfLiquidations)
             ];
