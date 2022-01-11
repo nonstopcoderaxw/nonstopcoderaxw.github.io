@@ -1,0 +1,132 @@
+.cAddressInput{
+    width: 500px !important;
+}
+
+.cTable{
+    max-width: 100%;
+}
+
+.cViewTokens{
+    color: #00B8D8;
+}
+
+.tDropDownItem{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tDropDownItemLink{
+    border-bottom: solid;
+    border-width: thin;
+    border-color: lightgray;
+}
+
+.cTokenBalanceSub{
+    margin-top: -5px
+}
+
+.noPaddingLeft{
+    padding-left: 0;
+}
+
+.cSectionWidth{
+    max-width: 80%;
+}
+
+.shortAddress{
+    text-overflow: ellipsis;
+    width: 100px;
+    overflow: hidden;
+}
+
+.nav-link{
+    display: inline;
+}
+
+.cAddressGroup{
+    width: 350px;
+}
+
+a{
+    color: #00B8D8
+}
+
+.abiTextArea{
+    height: 642px !important;
+}
+
+.cABIAction{
+    font-size: 0.8em !important;
+    font-weight: bold;
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
+.cABIActionPosition{
+    position: relative;
+    top: 230px;
+}
+
+.noMargin{
+    margin: 0 !important;
+}
+
+.cFloatRight{
+    float: right
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    color: grey;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 0.5px dashed lightgray;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}
+
+.detailTable{
+    width: 80%;
+}
+
+.addressRow{
+    white-space: nowrap;
+    display: block;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #00B8D8 !important;
+}
+
+.cNav{
+    display: inline;
+    font-weight: bold;
+}
+
+.cNavItem{
+    margin-right: 150px;
+    display: inline;
+}
+
+.cInlineDisplay{
+    display: inline;
+}
+
+.cFloateRight{
+    float: right;
+}
+
+.cHide{
+    display: none;
+}
