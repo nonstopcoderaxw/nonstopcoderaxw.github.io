@@ -849,7 +849,7 @@ section {
 
 #intro .c-section-description {
   color: white;
-  width: 100%;
+  width: 80%;
 }
 
 @media (min-width: 769px) {
@@ -1047,7 +1047,7 @@ section {
 
 #app .c-section-description {
   text-align:left;
-  width: 750px;
+  width: 80%;
 }
 
 #app .c-bi-check-circle {
