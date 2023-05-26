@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>Session Storage Sharing Without Cookie</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+	<div id="main"></div>
+
+	<script type="text/javascript">
+
+		function main() {
+			// try to get sessionId
+			const salt = (() => {
+				const match = document.cookie.match(new RegExp('(^| )' + "salt" + '=([^;]+)'));
+				if (match)  return match[2];
+			})();
+
+			if (localStorage.getItem("encryptedSessionId") && salt) {
+    			const sessionId = CryptoJS.AES.decrypt(
+    				localStorage.getItem("encryptedSessionId"), salt
+    			).toString(CryptoJS.enc.Utf8);
+    			sessionStorage.setItem("sessionId", sessionId);
+			}
+
+			// if no sessionId received, then show login view
+			if (!sessionStorage.getItem("sessionId")) {
+				const loginView = `
+					<div id="loginView">
+						No sessionId found, Please login below<br/>
+						Username: <input type="text" placeholder="any text works" /> <br/>
+						Password: <input type="text" placeholder="any text works"/> <br/>
+						<button id="loginBtn" onclick="login()">Login</button>
+					</div>`;
+
+				document.getElementById("main").innerHTML = loginView;
+			}
+
+			// if sessionId received, then show clear session id view
+			if (sessionStorage.getItem("sessionId")) {
+				const clearSessionIdView = `
+					<div id="clearSessionIdView">
+						Your session id ${sessionStorage.getItem("sessionId")} <br/>
+						1. open another tab: expect the session id remains. <br/>
+						2. close all the tabs and reopen the browser: expect the login view again. <br/>
+						**tip: copy the url before closing all tabs: ${window.location.href} <br/>
+						<button id="clearBack" onclick="clearBack()">Clear session Id and go back to the login view!</button>
+					</div>`;
+				document.getElementById("main").innerHTML = clearSessionIdView;
+			}
+		}
+
+		// login btn onclick
+		function login() {
+			console.log("login....");
+			const newSessionId = createSessionId();
+
+			//encrypt with a salt
+			const salt = generateRandomString(32);
+			document.cookie = `salt=${salt}`;
+			const encryptedSessionId = CryptoJS.AES.encrypt(newSessionId, salt);
+			localStorage.setItem("encryptedSessionId", encryptedSessionId);
+			console.log("session id stored in sessionStorage!");
+			main();
+		}
+
+		// clear btn onclick
+		function clearBack() {
+			console.log("clear...");
+			sessionStorage.removeItem("sessionId");
+			localStorage.removeItem("encryptedSessionId");
+			main();
+		}
+
+		// random string as session id on successful login
+		// for non production demo only
+		function createSessionId() {
+			return generateRandomString(64);
+		}
+
+		function generateRandomString(length) {
+			let result = '';
+			const characters =
+			    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			const charactersLength = characters.length;
+			for (let i = 0; i < length; i++) {
+			    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			return result;
+		};
+
+		main();
+	</script>		
+
+	</body>
+</html>
