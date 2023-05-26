@@ -1,0 +1,102 @@
+<html>
+	<head>
+		<title>Session Storage Sharing Without Cookie</title>
+	</head>
+	<body>
+	<div id="main"></div>
+
+	<script type="text/javascript">
+
+		function main() {
+			// try to get sessionId
+			if (sessionStorage.length === 0) {
+				localStorage.setItem('prefix_getSessionStorage', generateRandomString(10));
+			}
+
+			// if no sessionId received, then show login view
+			if (!sessionStorage.getItem("sessionId")) {
+				const loginView = `
+					<div id="loginView">
+						No sessionId found, Please login below<br/>
+						Username: <input type="text" placeholder="any text works" /> <br/>
+						Password: <input type="text" placeholder="any text works"/> <br/>
+						<button id="loginBtn" onclick="login()">Login</button>
+					</div>`;
+
+				document.getElementById("main").innerHTML = loginView;
+			}
+
+			// if sessionId received, then show clear session id view
+			if (sessionStorage.getItem("sessionId")) {
+				const clearSessionIdView = `
+					<div id="clearSessionIdView">
+						Your session id ${sessionStorage.getItem("sessionId")} <br/>
+						1. open another tab: expect the session id remains. <br/>
+						2. close all the tabs and reopen the browser: expect the login view again. <br/>
+						**tip: copy the url before closing all tabs: ${window.location.href} <br/>
+						<button id="clearBack" onclick="clearBack()">Clear session Id and go back to the login view!</button>
+					</div>`;
+				document.getElementById("main").innerHTML = clearSessionIdView;
+			}
+			
+			if (sessionStorage.length > 0) {
+				sessionStorage.getItem("sessionId");
+				//
+			}
+
+			window.addEventListener('storage', function(event) {
+				if (event.key == 'prefix_getSessionStorage') {
+					localStorage.setItem('prefix_sessionStorage', JSON.stringify(sessionStorage));
+					localStorage.removeItem('prefix_sessionStorage');
+				} 
+
+				if (event.key == 'prefix_sessionStorage' && !sessionStorage.getItem("sessionId")) {
+					const obj = JSON.parse(event.newValue);
+					if (obj) {
+						const sessionId = obj.sessionId;
+						sessionStorage.setItem("sessionId", sessionId);
+						console.log("session Id received....");
+						main();
+					}
+				}
+			});
+		}
+
+		// login btn onclick
+		function login() {
+			console.log("login....");
+			const newSessionId = createSessionId();
+			sessionStorage.setItem("sessionId", newSessionId);
+			console.log("session id stored in sessionStorage!");
+			main();
+		}
+
+		// clear btn onclick
+		function clearBack() {
+			console.log("clear...");
+			sessionStorage.removeItem("sessionId");
+			main();
+		}
+
+		// random string as session id on successful login
+		// for non production demo only
+		function createSessionId() {
+			return generateRandomString(64);
+		}
+
+		function generateRandomString(length) {
+			let result = '';
+			const characters =
+			    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			const charactersLength = characters.length;
+			for (let i = 0; i < length; i++) {
+			    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			return result;
+		};
+
+		main();
+	</script>		
+
+	</body>
+</html>
