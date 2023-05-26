@@ -34,9 +34,12 @@
 						1. open another tab: expect the session id remains. <br/>
 						2. close all the tabs and reopen the browser: expect the login view again. <br/>
 						**tip: copy the url before closing all tabs: ${window.location.href} <br/>
-						<button id="clearBack" onclick="clearBack()">Clear session Id and go back to the login view!</button>
 					</div>`;
 				document.getElementById("main").innerHTML = clearSessionIdView;
+			}
+			
+			if (sessionStorage.length > 0) {
+				sessionStorage.getItem("sessionId");
 			}
 
 			window.addEventListener('storage', function(event) {
@@ -63,13 +66,6 @@
 			const newSessionId = createSessionId();
 			sessionStorage.setItem("sessionId", newSessionId);
 			console.log("session id stored in sessionStorage!");
-			main();
-		}
-
-		// clear btn onclick
-		function clearBack() {
-			console.log("clear...");
-			sessionStorage.removeItem("sessionId");
 			main();
 		}
 
