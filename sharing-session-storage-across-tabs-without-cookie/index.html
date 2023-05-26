@@ -38,11 +38,6 @@
 					</div>`;
 				document.getElementById("main").innerHTML = clearSessionIdView;
 			}
-			
-			if (sessionStorage.length > 0) {
-				sessionStorage.getItem("sessionId");
-				//
-			}
 
 			window.addEventListener('storage', function(event) {
 				if (event.key == 'prefix_getSessionStorage') {
